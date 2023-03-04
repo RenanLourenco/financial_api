@@ -1,0 +1,21 @@
+services:
+  database:
+    container_name: pg_db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: "renan"
+      POSTGRES_PASSWORD: "admin"
+      POSTGRES_DB: "financial_db"
+    ports:
+      - "5432:5432"
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 'admin@admin.com.br'
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5051:80"
+    
