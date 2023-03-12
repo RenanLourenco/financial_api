@@ -14,3 +14,20 @@ CREATE TABLE despesas(
 
 INSERT INTO despesas(descricao,valor) VALUES('teste',123);
 INSERT INTO receitas(descricao,valor) VALUES('testandoReceita', 1234);
+
+CREATE TABLE categorias (
+    categoria_id SERIAL PRIMARY KEY,
+    descricao VARCHAR(255) NOT NULL UNIQUE,
+)
+
+INSERT INTO categorias(descricao) VALUES('Alimentação');
+INSERT INTO categorias(descricao) VALUES('Saúde');
+INSERT INTO categorias(descricao) VALUES('Moradia');
+INSERT INTO categorias(descricao) VALUES('Transporte');
+INSERT INTO categorias(descricao) VALUES('Educação');
+INSERT INTO categorias(descricao) VALUES('Lazer');
+INSERT INTO categorias(descricao) VALUES('Imprevistos');
+INSERT INTO categorias(descricao) VALUES('Outras');
+
+ALTER TABLE despesas
+ADD COLUMN categoria_id INTEGER NOT NULL;

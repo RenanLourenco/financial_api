@@ -4,6 +4,16 @@ const receitasServices = new Services('receitas')
 class ReceitaController{
     static async list(req,res){
         try {
+            if(req.query.descricao){
+                try {
+                    const { descricao } = req.query
+                    const receitas = await receitasServices.search(descricao)
+
+                    return res.status(200).json(receitas)
+                } catch (error) {
+                    return res.status(500).json(error.message)
+                }
+            }
             const receitas = await receitasServices.getAll()
             return res.status(200).json(receitas)
         } catch (error) {
@@ -45,6 +55,17 @@ class ReceitaController{
             return res.status(500).json(error.message)
         }
     }
+    static async date_search(req,res){
+        try {
+            const { year, month } = req.params
+            const receitas = await receitasServices.date_search(year,month)
+            return res.status(200).json(receitas)
+        } catch (error) {
+            return res.status(500).json(error.message)
+        }
+    }
+    
+
 }
 
 module.exports = ReceitaController

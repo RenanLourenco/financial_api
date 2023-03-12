@@ -8,5 +8,6 @@ router
     .delete('/receita/:id',ReceitaController.delete)
     .put('/receita/:id',ReceitaController.put)
     .get('/receita/:id',ReceitaController.get)
+    .get('/receitas/:year/:month',ReceitaController.date_search)
 
 module.exports = router

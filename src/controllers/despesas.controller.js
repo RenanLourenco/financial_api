@@ -1,9 +1,19 @@
-const Services = require('../services/Services')
-const despesasServices = new Services('despesas')
+const { DespesasServices } = require('../services')
+const despesasServices = new DespesasServices()
 
 class DespesaController{
     static async list(req,res){
         try {
+            if(req.query.descricao){
+                try {
+                    const { descricao } = req.query
+                    const despesas = await despesasServices.search(descricao)
+
+                    return res.status(200).json(despesas)
+                } catch (error) {
+                    return res.status(500).json(error.message)
+                }
+            }
             const despesas = await despesasServices.getAll()
             return res.status(200).json(despesas)
         } catch (error) {
@@ -12,7 +22,7 @@ class DespesaController{
     }
     static async post(req,res){
         try {
-            const despesa = await despesasServices.post(req.body)
+            const despesa = await despesasServices.create(req.body)
             return res.status(200).json(despesa)
         } catch (error) {
             return res.status(500).json(error.message)
@@ -41,6 +51,15 @@ class DespesaController{
             const { id } = req.params
             const despesa = await despesasServices.get(id)
             return res.status(200).json(despesa) 
+        } catch (error) {
+            return res.status(500).json(error.message)
+        }
+    }
+    static async date_search(req,res){
+        try {
+            const { year, month } = req.params
+            const despesas = await despesasServices.date_search(year,month)
+            return res.status(200).json(despesas)
         } catch (error) {
             return res.status(500).json(error.message)
         }
