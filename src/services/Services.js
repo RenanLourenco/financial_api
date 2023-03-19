@@ -9,8 +9,8 @@ class Services {
         return data.rows
     }
     async post(data){
-        const {descricao, valor, categoria_id} = data
-        const newData = await pool.query(`INSERT INTO ${this.table} (descricao,valor) VALUES('${descricao}',${valor},) RETURNING *`)
+        const {descricao, valor} = data
+        const newData = await pool.query(`INSERT INTO ${this.table} (descricao,valor) VALUES('${descricao}',${valor}) RETURNING *`)
         return newData.rows[0]
     }
     async delete(id){
@@ -33,6 +33,9 @@ class Services {
     async date_search(year,month){
         const data = await pool.query(`SELECT * FROM ${this.table} WHERE data BETWEEN '${year}-${month}-01 00:00:00' AND NOW()`)
         return data.rows
+    }
+    async clearDb(){
+        await pool.query(`DELETE FROM ${this.table}`)
     }
 }
 
