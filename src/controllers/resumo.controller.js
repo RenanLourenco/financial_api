@@ -20,7 +20,7 @@ class ResumoController {
                 resumo.formatForSummary(despesa)
             })
             resumo.saldo = resumo.total_receitas - resumo.total_despesas
-            res.status(200).json(resumo)
+            res.status(200).json(resumo);
 
         } catch (error) {
             res.status(500).json(error.message)

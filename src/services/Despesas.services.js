@@ -6,7 +6,10 @@ class DespesasServices extends Services{
         super('despesas')
     }
     async create(data){
-        const {descricao, valor, categoria_id} = data
+        let {descricao, valor, categoria_id} = data
+        if(!categoria_id){
+            categoria_id = 8;
+        }
         const newData = await pool.query(`INSERT INTO ${this.table} (descricao,valor,categoria_id) VALUES('${descricao}',${valor}, ${categoria_id}) RETURNING *`)
         return newData.rows[0]
     }

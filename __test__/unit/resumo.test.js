@@ -6,7 +6,7 @@ const despesasServices = new DespesasServices()
 
 
 
-beforeAll(async () => {
+beforeEach(async () => {
     //mocking some despesas
     for(let i = 1; i <= 8; i++){
         await despesasServices.create({
@@ -145,6 +145,6 @@ describe('Summary unit Tests', () => {
 
 })
 
-afterAll(async() => {
+afterEach(async() => {
     await despesasServices.clearDb()
 })

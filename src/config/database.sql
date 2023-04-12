@@ -31,3 +31,10 @@ INSERT INTO categorias(descricao) VALUES('Outras');
 
 ALTER TABLE despesas
 ADD COLUMN categoria_id INTEGER NOT NULL;
+
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password BINARY(16) NOT NULL
+);

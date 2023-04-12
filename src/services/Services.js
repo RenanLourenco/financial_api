@@ -24,6 +24,7 @@ class Services {
     }
     async get(id){
         const data = await pool.query(`SELECT * FROM ${this.table} WHERE id = ${id}`)
+        if(!data.rows[0]) return {};
         return data.rows[0]
     }
     async search(query){
